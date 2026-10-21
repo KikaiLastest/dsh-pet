@@ -1558,6 +1558,10 @@ class PetSprite {
   onClick() {
     const d = this.dragState;
     if (d.active || d.dragging || this.justDragged) return;
+    // 点击呼出 DSH（由 dsh-pet-click-fix 自动维护）
+    if (window.petBridge && typeof window.petBridge.openDshSite === 'function') {
+      window.petBridge.openDshSite(ORIGIN);
+    }
     // 积分判定已在 onPointerDown（按下即触发）完成：
     // 本次按下已触发过积分 → 只收手停住、**不**再播普通点击动画（粒子+弹窗即反馈，与浏览器同构）
     if (this.pressScoreFired) {
